@@ -111,19 +111,7 @@ function deleteAlarm(id) {
     })
 }
 
-function getAllAlarms() {
-    Parse.initialize("IkN5Q81OcCM19sFxWNeB6s1kwpp42u84koF9krkg", "ZRr2YGU2n90eCxKYt3wVj1X6hWQb5dSGmOO1nQfQ");
 
-    var AlarmObject = Parse.Object.extend("Alarm");
-    var query = new Parse.Query(AlarmObject);
-    query.find({
-        success: function(results) {
-            for (var i = 0; i < results.length; i++) {
-                insertAlarm(results[i].get("hours"), results[i].get("mins"), results[i].get("ampm"), results[i].get("alarmName"), results[i].id);
-            }
-        }
-    });
-}
 
 function signinCallback(authResult) {
   if (authResult['status']['signed_in']) {
