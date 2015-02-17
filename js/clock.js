@@ -125,7 +125,14 @@ function getAllAlarms() {
     });
 }
 
-getAllAlarms();
+function signinCallback(authResult) {
+  if (authResult['status']['signed_in']) {
+    document.getElementById('signinButton').setAttribute('style', 'display: none');
+    console.log('Signed In!');
+  } else {
+    console.log('Sign-in state: ' + authResult['error']);
+  }
+}
 
 getTemp();
 
