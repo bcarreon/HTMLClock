@@ -128,12 +128,11 @@ function getAllAlarms() {
 function signinCallback(authResult) {
   if (authResult['status']['signed_in']) {
     console.log('Signed In!');
+    getAllAlarms();
   } else {
     console.log('Sign-in state: ' + authResult['error']);
   }
 }
-
-getAllAlarms();
 
 getTemp();
 
