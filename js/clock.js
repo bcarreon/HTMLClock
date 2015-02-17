@@ -127,7 +127,6 @@ function getAllAlarms() {
 
 function signinCallback(authResult) {
   if (authResult['status']['signed_in']) {
-    getAllAlarms();
     document.getElementById('signinButton').setAttribute('style', 'display: none');
     console.log('Signed In!');
   } else {
