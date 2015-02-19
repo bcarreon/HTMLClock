@@ -140,10 +140,10 @@ function signinCallback(authResult) {
         });
 
         request.execute(function(resp) {
-          console.log('ID: ' + resp.id);
-          console.log('Display Name: ' + resp.displayName);
-          console.log('Image URL: ' + resp.image.url);
-          console.log('Profile URL: ' + resp.url);
+          //console.log('ID: ' + resp.id);
+          //console.log('Display Name: ' + resp.displayName);
+          //console.log('Image URL: ' + resp.image.url);
+          //console.log('Profile URL: ' + resp.url);
 
           user = resp.id;
           $("#alarms").prepend(resp.displayName);
