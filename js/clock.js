@@ -129,7 +129,21 @@ function signinCallback(authResult) {
   if (authResult['status']['signed_in']) {
     console.log('Signed In!');
     getAllAlarms();
-    
+
+    gapi.client.load('plus','v1', function(){ 
+        // once we get this call back, gapi.client.plus.* will exist
+        var request = gapi.client.plus.people.get({
+          'userId' : 'me'
+        });
+
+        request.execute(function(resp) {
+          console.log('ID: ' + resp.id);
+          console.log('Display Name: ' + resp.displayName);
+          console.log('Image URL: ' + resp.image.url);
+          console.log('Profile URL: ' + resp.url);
+        });
+    });
+
   } else {
     console.log('Sign-in state: ' + authResult['error']);
   }
