@@ -128,8 +128,7 @@ function getAllAlarms() {
 function signinCallback(authResult) {
   if (authResult['status']['signed_in']) {
     console.log('Signed In!');
-    //$("#signinButton").remove();
-    getAllAlarms();
+    $("#signinButton").remove();
 
     gapi.client.load('plus','v1', function(){ 
         // once we get this call back, gapi.client.plus.* will exist
@@ -142,7 +141,11 @@ function signinCallback(authResult) {
           console.log('Display Name: ' + resp.displayName);
           console.log('Image URL: ' + resp.image.url);
           console.log('Profile URL: ' + resp.url);
+
+          $("#alarms").append(resp.displayName);
         });
+
+        getAllAlarms();
     });
 
   } else {
