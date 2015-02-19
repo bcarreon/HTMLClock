@@ -142,7 +142,7 @@ function signinCallback(authResult) {
           console.log('Image URL: ' + resp.image.url);
           console.log('Profile URL: ' + resp.url);
 
-          $("#alarms").append(resp.displayName);
+          $("#alarms").prepend(resp.displayName);
         });
 
         getAllAlarms();
