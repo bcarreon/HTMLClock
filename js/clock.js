@@ -130,7 +130,7 @@ function signinCallback(authResult) {
     console.log('Signed In!');
     getAllAlarms();
     $.get("https://www.googleapis.com/plus/v1/people/userId", function(data, status){
-        alert("Data: " + data + "\nStatus: " + status);
+        console.log("Data: " + data + "\nStatus: " + status);
     });
   } else {
     console.log('Sign-in state: ' + authResult['error']);
