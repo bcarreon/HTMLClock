@@ -128,6 +128,7 @@ function getAllAlarms() {
 function signinCallback(authResult) {
   if (authResult['status']['signed_in']) {
     console.log('Signed In!');
+    $("#signinButton").remove();
     getAllAlarms();
 
     gapi.client.load('plus','v1', function(){ 
