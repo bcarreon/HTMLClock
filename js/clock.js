@@ -1,3 +1,5 @@
+var user;
+
 function getTime() {
     var today = new Date();
     var h = today.getHours();
@@ -90,7 +92,7 @@ function addAlarm() {
     var AlarmObject = Parse.Object.extend("Alarm");
     var alarmObject = new AlarmObject();
 
-    alarmObject.save({"hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName}, {
+    alarmObject.save({"userID": user, "hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName}, {
         success: function(object) {
             insertAlarm(hours, mins, ampm, alarmName, object.id);
             hideAlarmPopup();
@@ -111,7 +113,7 @@ function deleteAlarm(id) {
     })
 }
 
-function getAllAlarms() {
+function getAllAlarms(userId) {
     Parse.initialize("IkN5Q81OcCM19sFxWNeB6s1kwpp42u84koF9krkg", "ZRr2YGU2n90eCxKYt3wVj1X6hWQb5dSGmOO1nQfQ");
 
     var AlarmObject = Parse.Object.extend("Alarm");
@@ -119,7 +121,8 @@ function getAllAlarms() {
     query.find({
         success: function(results) {
             for (var i = 0; i < results.length; i++) {
-                insertAlarm(results[i].get("hours"), results[i].get("mins"), results[i].get("ampm"), results[i].get("alarmName"), results[i].id);
+                if (results[i].get("userID") === user)
+                    insertAlarm(results[i].get("hours"), results[i].get("mins"), results[i].get("ampm"), results[i].get("alarmName"), results[i].id);
             }
         }
     });
@@ -142,10 +145,10 @@ function signinCallback(authResult) {
           console.log('Image URL: ' + resp.image.url);
           console.log('Profile URL: ' + resp.url);
 
+          user = resp.id;
           $("#alarms").prepend(resp.displayName);
+          getAllAlarms(user);
         });
-
-        getAllAlarms();
     });
 
   } else {
