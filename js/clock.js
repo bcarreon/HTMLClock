@@ -92,11 +92,12 @@ function addAlarm() {
     var AlarmObject = Parse.Object.extend("Alarm");
     var alarmObject = new AlarmObject();
 
+    ga('send', 'event', 'Alarm', 'Add');
+
     alarmObject.save({"userID": user, "hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName}, {
         success: function(object) {
             insertAlarm(hours, mins, ampm, alarmName, object.id);
             hideAlarmPopup();
-            ga('send', 'event', 'Alarm', 'Add');
         }
     });
 }
@@ -107,10 +108,11 @@ function deleteAlarm(id) {
     var AlarmObject = Parse.Object.extend("Alarm");
     var alarmObject = new Parse.Query(AlarmObject);
 
+    ga('send', 'event', 'Alarm', 'Delete');
+
     alarmObject.get(id, {
         success: function(myObject) {
             myObject.destroy({});
-            ga('send', 'event', 'Alarm', 'Delete');
         }
     })
 }
